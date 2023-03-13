@@ -31,7 +31,10 @@ def return_metrics():
         clamd_version = clamd_socket_send('VERSION').rstrip('\n').replace('/',' ').split(' ')
         clamAV_version = clamd_version[1]
         database_version = clamd_version[2]
-        database_date = clamd_version[5] + '-' + clamd_version[4] + '-' + clamd_version[7]
+        if clamd_version[5] == '':
+            database_date = '0' + clamd_version[6]+ '-' + clamd_version[4] + '-' + clamd_version[8]
+        else:
+            database_date = clamd_version[5] + '-' + clamd_version[4] + '-' + clamd_version[7]
     except:
         print('There was a problem with clamAV')
         clamAV_status = 0
